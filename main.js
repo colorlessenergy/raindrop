@@ -19,7 +19,7 @@ class Rain {
   }
   setUp () {
     for (var i = 0; i < 100; i++) {
-      drop[i] = new RainDrop(Math.floor(Math.random() * 499), Math.floor(Math.random() * 100) - 400, 5, Math.floor(Math.random() * 13) + 10, canvas);
+      drop[i] = new RainDrop(Math.floor(Math.random() * 499), Math.floor(Math.random() * 250) - 600, 5, Math.floor(Math.random() * 13) + 10, canvas);
     }
     setInterval(this.update, 10);
   }
