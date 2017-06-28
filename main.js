@@ -20,24 +20,31 @@ document.querySelector('body').appendChild(c);
      this.w = w;
      this.h = h;
      this.ctx = ctx;
-
    }
 
    createRain() {
-     console.log('called');
      this.ctx.fillStyle = "purple";
-     this.ctx.fill();
      this.ctx.rect(this.x, this.y, this.w, this.h);
+     this.ctx.fill();
    }
 
    fall() {
-     this.y = this.y + 100;
+     this.y = this.y + 10;
+
+     if (this.y > 500) {
+       this.y =  Math.floor(Math.random() * 100) - 150;
+       this.x = Math.floor(Math.random() * 499);
+     }
    }
  }
 
 
 function update () {
-  canvas.clearRect(0, 0, c.height, c.width);
+  canvas.beginPath();
+  canvas.fillStyle = "black";
+  canvas.clearRect(0, 0, 500, 500);
+  canvas.fillRect(0, 0, 500, 500);
+  canvas.closePath();
   for (var i = 0; i < drop.length; i++) {
     drop[i].createRain();
     drop[i].fall();
@@ -45,12 +52,10 @@ function update () {
 }
 
 function setUp () {
-  canvas.fillStyle = "black";
-  canvas.fillRect(0 ,0, c.width, c.height);
-  for (var i = 0; i < 5; i++) {
-    drop[i] = new RainDrop(Math.floor(Math.random() * 499), 100, 5, 15, canvas);
+  for (var i = 0; i < 100; i++) {
+    drop[i] = new RainDrop(Math.floor(Math.random() * 499), Math.floor(Math.random() * 100) - 300,5, Math.floor(Math.random() * 13) + 10, canvas);
   }
-  setInterval(update, 100)
+  setInterval(update, 10);
 }
 
 setUp();
